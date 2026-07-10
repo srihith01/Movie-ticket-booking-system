@@ -31,10 +31,12 @@ function updateStatus(state) {
     if (state === 'live') {
         statusBadge.classList.add('status-live');
         statusBadge.textContent = '● Live: C++ Server Connected';
-    } else if (state === 'mock') {
+    }
+     else if (state === 'mock') {
         statusBadge.classList.add('status-mock');
         statusBadge.textContent = '● Mock Mode: Local Server';
-    } else {
+    } 
+    else {
         statusBadge.classList.add('status-offline');
         statusBadge.textContent = '● Connecting...';
     }
