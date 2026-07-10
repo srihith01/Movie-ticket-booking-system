@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Cineplex - Movie Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AURA CINEPLEX</h1>
+            <p class="subtitle">Now Playing: <strong style="color: var(--accent-hover);">Avengers: Doomsday</strong></p>
+            <p class="subtitle" style="margin-top: 5px; font-size: 0.85rem;">Ticket Price: $12.50 per seat</p>
+            <div id="statusBadge" class="status-badge status-offline">Connecting to Server...</div>
+        </header>
+        <div class="booking-card">
+            <!-- Screen area -->
+            <div class="screen-container">
+                <div class="screen"></div>
+                <div class="screen-label">SCREEN</div>
+            </div>
+            <!-- Seat grid -->
+            <div class="seating-area" id="seatingArea">
+                <!-- Dynamically populated by JS -->
+            </div>
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="seat available-legend"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat selected-legend"></div>
+                    <span>Selected</span>
+                </div>
+                <div class="legend-item">
+                    <div class="seat booked-legend"></div>
+                    <span>Booked</span>
+                </div>
+            </div>
+            <!-- Checkout panel -->
+            <div class="checkout-panel">
+                <div class="checkout-info">
+                    <div>Selected: <span id="selectedSeatsLabel" style="color: var(--accent-hover); font-weight: 600;">None</span></div>
+                    <div>Total Price: <span id="totalPriceLabel" style="color: var(--available); font-weight: 800;">$0.00</span></div>
+                </div>
+                <button id="bookBtn" class="btn" disabled>Confirm Booking</button>
+            </div>
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-num" id="availableCount">0</span>
+                    <span class="stat-label">Available</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="bookedCount">0</span>
+                    <span class="stat-label">Booked</span>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>Powered by C++ & Javascript Backend Server</p>
+        </footer>
+    </div>
+    <!-- Booking Successful Modal -->
+    <div id="receiptModal" class="modal-overlay">
+        <div class="receipt-card">
+            <div class="success-icon">✓</div>
+            <h2>Booking Successful!</h2>
+            <div class="receipt-details">
+                <p><strong>Movie:</strong> <span>Avengers: Doomsday</span></p>
+                <p><strong>Seats Booked:</strong> <span id="receiptSeats">A1, A2</span></p>
+                <p><strong>Total Paid:</strong> <span id="receiptPrice">$0.00</span></p>
+                <p><strong>Reference ID:</strong> <span id="receiptId">TXN-XXXXXX</span></p>
+            </div>
+            <button id="closeReceiptBtn" class="btn">Done</button>
+        </div>
+    </div>
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
+</html>
