@@ -1,20 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const FILE = path.join(process.cwd(), 'seats.json');
-
-function readSeats() {
-  try {
-    const raw = fs.readFileSync(FILE, 'utf8');
-    return JSON.parse(raw);
-  } catch (e) {
-    const arr = Array(24).fill(false);
-    fs.writeFileSync(FILE, JSON.stringify(arr));
-    return arr;
-  }
-}
-
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Content-Type', 'application/json');
@@ -23,8 +7,15 @@ module.exports = (req, res) => {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
   
   try {
-    const seats = readSeats();
-    res.status(200).json(seats);
+    // Use in-memory storage for now (will reset on redeploy)
+    // For persistent state, use Vercel KV or a database
+    if (!global.seats) {
+      global.seats = Array(24).fill(false);
+      global.seats[2] = true;
+      global.seats[5] = true;
+      global.seats[13] = true;
+    }
+    res.status(200).json(global.seats);
   } catch (err) {
     console.error('Error reading seats:', err);
     res.status(500).json({ error: 'Failed to read seats' });
